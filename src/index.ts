@@ -1,11 +1,12 @@
 import express from 'express';
-import { day1 } from './day1';
+import { day2 } from './day2';
 
 const app = express();
 const port = 3000;
 
 const main = async () => {
-    day1();
+    // day1();
+    day2();
 };
 
 app.listen(port, () => {
