@@ -11,6 +11,7 @@ export function day1() {
 
         let leftList: number[] = [];
         let rightList: number[] = [];
+        let frequency = new Map();
 
         // * newline === '\n'
 
@@ -49,11 +50,33 @@ export function day1() {
 
         for (let i = 0; i < leftList.length; i++) {
             distanceSum += Math.abs(leftList[i] - rightList[i]);
-            if (Number.isNaN(distanceSum)) {
+
+            // build left list
+            if (!frequency.has(leftList[i])) {
+                frequency.set(leftList[i], 0);
             }
         }
-        console.log('distanceSum', distanceSum);
 
-        // where am i getting NaN?
+        for (const num of rightList) {
+            // console.log('num', num);
+            if (frequency.has(num)) {
+                const existingNum = frequency.get(num);
+                frequency.set(num, existingNum + 1);
+                console.log('existingNum', existingNum);
+            }
+        }
+
+        let simScore = 0;
+
+        for (const num of leftList) {
+            if (frequency.has(num) && frequency.get(num) > 0) {
+                simScore += num * frequency.get(num);
+            }
+        }
+
+        // * solution #1
+        console.log('distanceSum', distanceSum);
+        // * solution #2
+        console.log('simScore', simScore);
     });
 }
