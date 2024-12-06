@@ -28,7 +28,7 @@ export function day2() {
         }
 
         for (const report of reports) {
-            let safe = true;
+            let fouls = 0;
             let direction = '';
 
             // here
@@ -47,30 +47,31 @@ export function day2() {
 
                 // Any two adjacent levels differ by at least one and at most three
                 if (difference < 1 || difference > 3) {
-                    safe = false;
-                    break;
+                    fouls++;
                 }
 
                 // The levels are either all increasing or all decreasing.
                 if (direction === 'dec') {
                     if (curr <= next) {
-                        safe = false;
-                        break;
+                        fouls++;
                     }
                 }
 
                 if (direction === 'inc') {
                     if (curr >= next) {
-                        safe = false;
-                        break;
+                        fouls++;
                     }
                 }
             }
 
-            if (safe) {
+            if (fouls <= 1) {
                 safeCount++;
             }
         }
+
+        // todo: need to check if the reports can be made safe if one number is removed
+        // can keep a count of "fouls"
+        // if 1 or less foul
 
         // * solution #1
         console.log('safeCount', safeCount);
